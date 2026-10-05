@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Entrar</button>
     </form>
+    <p><a href="registro.php">¿No tienes cuenta? Regístrate aquí</a></p>
     <p><small>Credenciales por defecto -> Usuario: <b>admin</b> | Contraseña: <b>1234</b></small></p>
 </body>
 </html>
