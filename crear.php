@@ -2,6 +2,15 @@
 // Requisito técnico y de modularización: Carga centralizada de la BD, rutas y logs
 require_once 'config.php';
 
+// Control de sesión: Validar que el usuario se ha autenticado previamente
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+// El usuario se obtiene de forma segura de la sesión activa
+$usuario = $_SESSION['usuario'];
+
 // Control de flujo CRUD (Create): Procesamiento del formulario al enviar por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -9,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $especie = $conn->real_escape_string($_POST['especie']);
     $ubicacion = $conn->real_escape_string($_POST['ubicacion']);
     $fecha = $_POST['fecha_plantacion'];
-    $usuario = $conn->real_escape_string($_POST['usuario']);
 
     // Modificación solicitada: Lógica para la subida de imágenes de los árboles
     $nombre_imagen = null;
@@ -37,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Operación SQL (Create): Inserción del nuevo registro incluyendo la ruta de la imagen
     $sql = "INSERT INTO arboles (especie, ubicacion, fecha_plantacion, usuario_registro, imagen) 
-            VALORES ('$especie', '$ubicacion', '$fecha', '$usuario', $imagen_sql)";
+            VALUES ('$especie', '$ubicacion', '$fecha', '$usuario', $imagen_sql)";
 
     if ($conn->query($sql)) {
         // Requisito obligatorio: Registro de la acción en el archivo de logs del sistema
@@ -61,6 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Añadir Nuevo Árbol</h1>
+    <p>Registrando como: <b><?= htmlspecialchars($_SESSION['usuario']) ?></b></p>
+
     <!-- Requisito técnico: Formulario POST que soporta envío de ficheros binarios (enctype) -->
     <form method="POST" enctype="multipart/form-data">
         <label>Especie:</label>
@@ -71,9 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label>Fecha de Plantación:</label>
         <input type="date" name="fecha_plantacion" required><br>
-
-        <label>Usuario:</label>
-        <input type="text" name="usuario" required><br>
 
         <!-- Modificación solicitada: Selector de archivos tipo input file para la imagen del árbol -->
         <label>Imagen del árbol:</label>
