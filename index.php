@@ -2,6 +2,13 @@
 // Requisito técnico: Carga centralizada de la conexión a la base de datos y configuraciones
 require_once 'config.php';
 
+// Control de sesión: Validar que el usuario se ha autenticado previamente
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // Operación CRUD (Read): Consulta SQL para obtener la lista completa de registros de árboles
 $sql = "SELECT * FROM arboles";
 $result = $conn->query($sql);
@@ -18,8 +25,12 @@ $result = $conn->query($sql);
 <body>
     <h1>Gestión de Árboles de Paiporta</h1>
     
+    <!-- Elemento de sesión: Muestra el usuario actual y permite cerrar sesión -->
+    <p>Conectado como: <b><?= htmlspecialchars($_SESSION['usuario']) ?></b> | <a href="logout.php">Cerrar Sesión</a></p>
+    
     <!-- Enlace de navegación hacia el formulario de inserción (Create) -->
     <a href="crear.php">Añadir nuevo árbol</a>
+    <br><br>
     
     <!-- Funcionalidad solicitada: Campo de búsqueda dinámica integrado con JavaScript -->
     <input type="text" id="buscar" placeholder="Buscar por especie o ubicación..." onkeyup="buscarArboles()">
