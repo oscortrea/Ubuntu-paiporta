@@ -1,97 +1,116 @@
 /* ==========================================
-   ESTILOS GENERALES Y LAYOUT
+   VARIABLES Y CONFIGURACIÓN DE TEMA MODERNO
    ========================================== */
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --success: #16a34a;
-    --success-dark: #15803d;
-    --danger: #dc2626;
-    --danger-dark: #b91c1c;
-    --bg-main: #f8fafc;
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --primary: #4f46e5;       /* Índigo moderno */
+    --primary-hover: #4338ca;
+    --success: #059669;       /* Esmeralda */
+    --success-hover: #047857;
+    --danger: #e11d48;        /* Rosa coral oscuro / Rojo moderno */
+    --danger-hover: #be123c;
+    --bg-app: #f8fafc;
     --bg-card: #ffffff;
-    --text-main: #1e293b;
+    --text-main: #0f172a;
     --text-muted: #64748b;
-    --border-color: #e2e8f0;
-    --radius: 8px;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --border-color: #cbd5e1;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
 }
 
+/* ==========================================
+   ESTILOS GENERALES Y LAYOUT
+   ========================================== */
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-sans);
     margin: 0;
-    padding: 30px;
-    background-color: var(--bg-main);
+    padding: 40px 20px;
+    background-color: var(--bg-app);
     color: var(--text-main);
-    line-height: 1.5;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Contenedor principal o bloque de contenido */
 h1 {
     color: var(--text-main);
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    font-weight: 700;
+    font-size: 2.1rem;
+    margin-bottom: 8px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
 }
 
 p {
     color: var(--text-muted);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+}
+
+/* Tarjeta contenedora de sesión o bienvenida */
+p b {
+    color: var(--text-main);
 }
 
 /* ==========================================
-   ENLACES Y NAVEGACIÓN
+   ENLACES Y BOTONES DE ACCIÓN PRINCIPAL
    ========================================== */
 a {
     text-decoration: none;
     color: var(--primary);
-    font-weight: 500;
+    font-weight: 600;
     transition: color 0.2s ease;
 }
 
 a:hover {
-    color: var(--primary-dark);
-    text-decoration: underline;
+    color: var(--primary-hover);
 }
 
-/* Estilo para enlaces sueltos de acción generales */
+/* Botón principal de enlace (ej: "Añadir nuevo árbol") */
 body > a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: var(--primary);
     color: white;
-    padding: 10px 18px;
-    border-radius: var(--radius);
+    padding: 11px 20px;
+    border-radius: var(--radius-md);
     font-weight: 600;
-    box-shadow: var(--shadow);
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-md);
+    transition: all 0.2s ease;
 }
 
 body > a:hover {
-    background-color: var(--primary-dark);
+    background-color: var(--primary-hover);
+    color: white;
     text-decoration: none;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 /* ==========================================
-   FORMULARIOS E INPUTS
+   FORMULARIOS Y CAMPOS DE ENTRADA
    ========================================== */
 form {
     background: var(--bg-card);
-    padding: 25px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    max-width: 500px;
-    margin-top: 20px;
-    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    max-width: 540px;
+    margin-top: 25px;
+    border: 1px solid #e2e8f0;
 }
 
 label {
     display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
+    margin-top: 18px;
+    margin-bottom: 6px;
     font-weight: 600;
     color: var(--text-main);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 input[type="text"], 
@@ -99,13 +118,14 @@ input[type="password"],
 input[type="date"], 
 select {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
+    padding: 11px 14px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
     font-size: 0.95rem;
     background-color: #fff;
+    color: var(--text-main);
     box-sizing: border-box;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 input[type="text"]:focus, 
@@ -114,94 +134,92 @@ input[type="date"]:focus,
 select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-/* Input específico de búsqueda en la tabla */
-#buscar {
-    width: 100%;
-    max-width: 350px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    background-color: var(--bg-card);
-    box-shadow: var(--shadow);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
 }
 
 /* ==========================================
-   BOTONES
-   ========================================== */
-button, input[type="submit"] {
-    padding: 10px 20px;
-    background-color: var(--success);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    margin-top: 15px;
-}
-
-button:hover, input[type="submit"]:hover {
-    background-color: var(--success-dark);
-    transform: translateY(-1px);
-}
-
-/* ==========================================
-   TABLAS ESTILIZADAS
+   TABLA MODERNA TIPO DASHBOARD
    ========================================== */
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 25px;
     background-color: var(--bg-card);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    border: 1px solid #e2e8f0;
 }
 
 th, td {
-    padding: 14px 16px;
+    padding: 16px 20px;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 0.95rem;
+    font-size: 0.93rem;
 }
 
 th {
-    background-color: #1e293b;
+    background-color: #0f172a;
     color: white;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    border-bottom: none;
+}
+
+td {
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    vertical-align: middle;
 }
 
 tr:last-child td {
     border-bottom: none;
 }
 
-tr:hover {
-    background-color: #f1f5f9;
+tr:hover td {
+    background-color: #f8fafc;
 }
 
-/* Acciones dentro de la tabla (Editar / Eliminar) */
+/* ==========================================
+   BOTONES Y ACCIONES DE TABLA
+   ========================================== */
+button, input[type="submit"] {
+    padding: 12px 24px;
+    background-color: var(--success);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+    margin-top: 20px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--success-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Botones de Editar y Eliminar dentro de la tabla */
 td a {
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
     font-size: 0.85rem;
     font-weight: 600;
-    margin-right: 5px;
+    margin-right: 6px;
+    transition: all 0.15s ease;
 }
 
 td a[href*="editar"] {
-    background-color: #eff6ff;
-    color: var(--primary);
+    background-color: #e0e7ff;
+    color: #3730a3;
 }
 
 td a[href*="editar"]:hover {
@@ -211,12 +229,20 @@ td a[href*="editar"]:hover {
 }
 
 td a[href*="eliminar"] {
-    background-color: #fef2f2;
-    color: var(--danger);
+    background-color: #ffe4e6;
+    color: #9f1239;
 }
 
 td a[href*="eliminar"]:hover {
     background-color: var(--danger);
     color: white;
     text-decoration: none;
+}
+
+/* Imágenes miniatura en la tabla */
+td img {
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e2e8f0;
 }
