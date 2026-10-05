@@ -8,6 +8,9 @@ define('DB_NAME', 'PaiportArbolado');
 // Database conection
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
+// Evitar problemas con acentos **
+$conn->set_charset("utf8mb4");
+
 if ($conn->connect_error) {
     die("ConnectError: " . $conn->connect_error);
 }
