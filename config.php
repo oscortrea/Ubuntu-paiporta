@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Path for Logs
-define('LOG_FILE', __DIR__ . '/logs/actions.log');
+define('LOG_FILE', __DIR__ . '/logs/acciones.log');
 
 // Functions
 function registerAction($action, $user) {
