@@ -1,6 +1,14 @@
 <?php
 require_once 'config.php';
 
+// Control de sesión: Validar que el usuario se ha autenticado
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+$usuario = $_SESSION['usuario'];
+
 $id = $_GET['id'] ?? null;
 if (!$id) {
     header("Location: index.php");
@@ -12,12 +20,16 @@ $sql = "SELECT * FROM arboles WHERE id = $id";
 $result = $conn->query($sql);
 $arbol = $result->fetch_assoc();
 
+if (!$arbol) {
+    header("Location: index.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $especie = $conn->real_escape_string($_POST['especie']);
     $ubicacion = $conn->real_escape_string($_POST['ubicacion']);
     $fecha = $_POST['fecha_plantacion'];
     $estado = $conn->real_escape_string($_POST['estado']);
-    $usuario = $conn->real_escape_string($_POST['usuario']);
 
     // Mantener la imagen actual por defecto
     $nombre_imagen = $arbol['imagen'];
@@ -67,6 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Editar Árbol</h1>
+    <p>Editando como: <b><?= htmlspecialchars($usuario) ?></b></p>
+    
     <form method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $arbol['id'] ?>">
 
@@ -85,9 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="enfermo" <?= $arbol['estado'] === 'enfermo' ? 'selected' : '' ?>>Enfermo</option>
             <option value="talado" <?= $arbol['estado'] === 'talado' ? 'selected' : '' ?>>Talado</option>
         </select><br>
-
-        <label>Usuario:</label>
-        <input type="text" name="usuario" value="<?= htmlspecialchars($arbol['usuario_registro']) ?>" required><br>
 
         <!-- Visualización de la foto actual -->
         <label>Imagen Actual:</label><br>
