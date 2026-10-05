@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label>Usuario:</label>
         <input type="text" name="usuario" required><br>
 
-        <!-- Modificación: Selector de archivos tipo input file para la imagen del árbol -->
+        <!-- Modificación solicitada: Selector de archivos tipo input file para la imagen del árbol -->
         <label>Imagen del árbol:</label>
         <input type="file" name="imagen" accept="image/*"><br>
 
