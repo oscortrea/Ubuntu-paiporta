@@ -1,55 +1,222 @@
+/* ==========================================
+   ESTILOS GENERALES Y LAYOUT
+   ========================================== */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --success: #16a34a;
+    --success-dark: #15803d;
+    --danger: #dc2626;
+    --danger-dark: #b91c1c;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --radius: 8px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 30px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.5;
 }
 
+/* Contenedor principal o bloque de contenido */
 h1 {
-    color: #2c3e50;
+    color: var(--text-main);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
+p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   ENLACES Y NAVEGACIÓN
+   ========================================== */
+a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Estilo para enlaces sueltos de acción generales */
+body > a {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+body > a:hover {
+    background-color: var(--primary-dark);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   FORMULARIOS E INPUTS
+   ========================================== */
+form {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    margin-top: 20px;
+    border: 1px solid var(--border-color);
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+input[type="text"], 
+input[type="password"],
+input[type="date"], 
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus,
+input[type="date"]:focus, 
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Input específico de búsqueda en la tabla */
+#buscar {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow);
+}
+
+/* ==========================================
+   BOTONES
+   ========================================== */
+button, input[type="submit"] {
+    padding: 10px 20px;
+    background-color: var(--success);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 15px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--success-dark);
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   TABLAS ESTILIZADAS
+   ========================================== */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 th, td {
-    padding: 10px;
+    padding: 14px 16px;
     text-align: left;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
 }
 
 th {
-    background-color: #3498db;
+    background-color: #1e293b;
     color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
 }
 
-tr\:nth-child(even) {
-    background-color: #f2f2f2;
+tr:last-child td {
+    border-bottom: none;
 }
 
-a {
+tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Acciones dentro de la tabla (Editar / Eliminar) */
+td a {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+td a[href*="editar"] {
+    background-color: #eff6ff;
+    color: var(--primary);
+}
+
+td a[href*="editar"]:hover {
+    background-color: var(--primary);
+    color: white;
     text-decoration: none;
-    color: #3498db;
-    margin: 0 5px;
 }
 
-input[type="text"], input[type="date"], select {
-    padding: 8px;
-    margin: 5px 0;
-    width: 100%;
-    max-width: 300px;
+td a[href*="eliminar"] {
+    background-color: #fef2f2;
+    color: var(--danger);
 }
 
-button {
-    padding: 10px 15px;
-    background-color: #2ecc71;
+td a[href*="eliminar"]:hover {
+    background-color: var(--danger);
     color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button\:hover {
-    background-color: #27ae60;
+    text-decoration: none;
 }
