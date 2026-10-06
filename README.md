@@ -1,39 +1,34 @@
-PaiportArbolado - Despliegue e Infraestructura en la Nube
+# PaiportArbolado: Despliegue, Infraestructura y Arquitectura Web
 
-Este repositorio contiene la solución completa para el despliegue, configuración y resolución de problemas de la aplicación web PaiportArbolado, desarrollada para el Ayuntamiento de Paiporta dentro del módulo de Recursos y Servicios en la Nube.
+Repositorio oficial para la implementación, configuración y despliegue del sistema de gestión **PaiportArbolado**, desarrollado para el Ayuntamiento de Paiporta en el marco del módulo de Recursos y Servicios en la Nube.
 
-📌 Descripción del Proyecto
+---
 
-El objetivo de este trabajo es recuperar una aplicación web en PHP inconclusa y ponerla en marcha en un entorno de servidor sobre infraestructura de virtualización (Hypervisor VirtualBox). La aplicación consiste en un sistema de gestión CRUD para el censo de árboles del municipio.
+## 1. Especificaciones del Sistema
 
-Funcionalidades Integradas:
+El proyecto implementa un sistema CRUD completo para la administración del censo de arbolado urbano, estructurado bajo un patrón MVC simplificado y complementado con una interfaz analítica y endpoints API REST.
 
-Create: Añadir nuevas entradas de árboles (especie, ubicación, estado, fecha e imagen).
+### Arquitectura Tecnológica
+* **Virtualización:** Oracle VM VirtualBox (Hypervisor Tipo 2).
+* **Sistema Operativo:** Ubuntu Server 26.04 LTS.
+* **Servidor HTTP:** Apache 2.4 con módulo `mod_rewrite` habilitado.
+* **Base de Datos:** MariaDB / MySQL.
+* **Lenguaje:** PHP 8.x (extensiones requeridas: `pdo_mysql`, `gd`, `mbstring`).
+* **Resolución Local:** `arboles.paiporta.local`
 
-Read: Listar los árboles registrados en la base de datos mediante tabla interactiva.
+### Funcionalidades y Componentes
+* **Gestión CRUD:** Alta, consulta, modificación y baja lógica/física de elementos del censo arbóreo (especie, ubicación, estado fitosanitario, fecha de plantación y recursos gráficos).
+* **Filtrado Dinámico:** Motor de búsqueda asíncrono integrado en la vista principal.
+* **API REST:** Endpoint dedicado (`/api/arboles.php`) para la serialización de datos en formato JSON.
+* **Cuadro de Mando:** Dashboard estadístico interactivo basado en Chart.js.
+* **Auditoría:** Sistema de registro persistente de transacciones y eventos en `/logs/`.
 
-Update: Editar la información técnica de cualquier árbol registrado.
+---
 
-Delete: Eliminar registros del censo tras previa confirmación.
+## 2. Guía de Conectividad y Redes
 
-Búsqueda/Filtros: Filtrado dinámico por especie o ubicación.
+El acceso al servidor virtualizado desde el host de desarrollo se gestiona mediante un esquema de reenvío de puertos (*Port Forwarding*) sobre interfaz NAT o direccionamiento estático en red privada virtual.
 
-Logs de Auditoría: Registro persistente de acciones en /logs/acciones.log.
-
-Subida de Archivos: Gestión de imágenes de árboles almacenadas en ./uploads/.
-
-Dashboard Estadístico: Gráficos dinámicos con Chart.js consumidos desde una API REST interna.
-
-🏗️ Arquitectura de la Infraestructura
-
-Hypervisor: Oracle VM VirtualBox
-
-Sistema Operativo: Ubuntu Server 26.04 LTS
-
-Servidor Web: Apache2 (con módulo rewrite activado)
-
-Base de Datos: MariaDB / MySQL
-
-Lenguaje de Programación: PHP 8.x (con extensiones pdo_mysql)
-
-Dominio Local (DNS): arboles.paiporta.local
+* **Conexión por Terminal (SSH):**
+  ```bash
+  ssh usuario@localhost -p 2222
