@@ -26,7 +26,7 @@ $result = $conn->query($sql);
     <p>Conectado como: <b><?= htmlspecialchars($_SESSION['usuario']) ?></b> | <a href="logout.php">Cerrar Sesión</a></p>
     
     <a href="crear.php">Añadir nuevo árbol</a>
-    <a href="dashboard.php" style="color: #059669; text-decoration: none; margin-left: 10px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Ver Dashboard Estadísticas</a>
+    <a href="dashboard.php" style="color: #27C2F5; text-decoration: none; margin-left: 10px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Ver Dashboard Estadísticas</a>
     <br><br>
     
     <!-- Input de búsqueda simple y directo -->
