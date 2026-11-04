@@ -1,22 +1,13 @@
--- 1. Limpieza y creación de usuario
-DROP USER IF EXISTS 'user_bd'@'localhost';
-DROP USER IF EXISTS 'user_bd'@'127.0.0.1';
-DROP USER IF EXISTS 'user_bd'@'%';
+-- create-db.sql: esquema de PaiportArbolado.
+-- El usuario de la aplicación (user_bd) y sus permisos NO se crean aquí:
+-- los crea OpenTofu/cloud-init solo para la IP del frontend, y la contraseña
+-- no debe estar nunca en un repositorio público.
 
-CREATE USER 'user_bd'@'127.0.0.1' IDENTIFIED BY 'passwdbd';
-CREATE USER 'user_bd'@'localhost' IDENTIFIED BY 'passwdbd';
-
--- 2. Creación de la base de datos y asignación de permisos
-CREATE DATABASE IF NOT EXISTS PaiportArbolado;
-
-GRANT ALL PRIVILEGES ON PaiportArbolado.* TO 'user_bd'@'127.0.0.1';
-GRANT ALL PRIVILEGES ON PaiportArbolado.* TO 'user_bd'@'localhost';
-FLUSH PRIVILEGES;
-
--- 3. Seleccionar la base de datos para crear las tablas
+-- 1. Base de datos
+CREATE DATABASE IF NOT EXISTS PaiportArbolado CHARACTER SET utf8mb4;
 USE PaiportArbolado;
 
--- 4. Tabla de Árboles (incluyendo el campo 'imagen' para las fotos)
+-- 2. Tabla de Árboles (incluye el campo 'imagen' para las fotos)
 CREATE TABLE IF NOT EXISTS arboles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     especie VARCHAR(50) NOT NULL,
@@ -27,7 +18,7 @@ CREATE TABLE IF NOT EXISTS arboles (
     imagen VARCHAR(255) DEFAULT NULL
 );
 
--- 5. Tabla de Usuarios (para la autenticación)
+-- 3. Tabla de Usuarios (autenticación)
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -35,6 +26,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (username, password) 
+-- 4. Usuario admin inicial (si ya existe, NO se le cambia la contraseña)
+INSERT INTO users (username, password)
 VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi')
-ON DUPLICATE KEY UPDATE password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+ON DUPLICATE KEY UPDATE username = username;
