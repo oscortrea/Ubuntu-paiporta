@@ -1,8 +1,10 @@
 <?php
 // Database config
-define('DB_HOST', '127.0.0.1');
-define('DB_USER', 'user_bd');  
-define('DB_PASS', 'passwdbd'); 
+// DB_HOST = IP privada de la VM de base de datos (db-01, red web<->BD).
+// Solo el frontend puede llegar a ella: ufw + usuario MySQL ligado a su IP.
+define('DB_HOST', '10.10.10.11');
+define('DB_USER', 'user_bd');
+define('DB_PASS', 'passwdbd');
 define('DB_NAME', 'PaiportArbolado');
 
 // Database conection
